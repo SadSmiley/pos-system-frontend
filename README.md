@@ -4,7 +4,6 @@ List of tasks for this side project
 
 ### Todo
 
-- [ ] Show Current Order Number based on Last Order Created
 - [ ] Show Current Time in Dashboard
 - [ ] Display All Product from database
 - [ ] On Click Add to Cart
@@ -14,6 +13,7 @@ List of tasks for this side project
 - [ ] Checkout Submit
 ### In Progress
 
+- [ ] Show Current Order Number based on Last Order Created
 
 ### Done ✓
 
