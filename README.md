@@ -4,17 +4,23 @@ List of tasks for this side project
 
 ### Todo
 
-- [ ] Orders
-- [ ] Settings
+- [ ] Show Current Order Number based on Last Order Created
+- [ ] Show Current Time in Dashboard
+- [ ] Display All Product from database
+- [ ] On Click Add to Cart
+- [ ] Barcode Scan Add to Cart
+- [ ] Enter UPC Code Add to Cart
+- [ ] Show Actual Summary (Subtotal, Tax, Total)
+- [ ] Checkout Submit
 ### In Progress
 
-- [ ] Dashboard
-  - [ ] Cart
-  - [ ] Categories
-  - [ ] Product List
-  - [ ] Barcode Input
+
 ### Done ✓
 
+- [x] Dashboard Layout
+- [x] Cart Layout
+- [x] Product List Layout
+- [x] Barcode Input Layout
 
 POS System for Small Retail Store
 

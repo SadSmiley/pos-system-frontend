@@ -3,7 +3,7 @@
     <div class="cart-component__header">
       <div class="title">Cart</div>
       <div class="close">
-        <q-btn icon="mdi-close" round flat />
+        <q-btn @click="$emit('close')" icon="mdi-close" round flat />
       </div>
     </div>
     <div class="cart-component__main">

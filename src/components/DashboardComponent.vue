@@ -17,7 +17,6 @@
       </q-input>
     </div>
     <div class="dashboard__main">
-      <!-- <div class="count">8 of 40</div> -->
       <product-list-component></product-list-component>
     </div>
   </div>
