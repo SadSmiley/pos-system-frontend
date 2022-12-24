@@ -1,1 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@100;300;400;500;600;700&display=swap');
+
 // app global css in SCSS form
+body {
+  background-color: rgb(246,247,250);
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+}

@@ -12,16 +12,15 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          POS App
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>POS v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
     <q-drawer
       v-model="leftDrawerOpen"
-      show-if-above
       bordered
     >
       <q-list>
@@ -51,46 +50,46 @@ import EssentialLink from 'components/EssentialLink.vue';
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev',
+    title: 'Dashboard',
+    caption: 'Go to your dashboard',
+    icon: 'dashboard',
+    link: '/dashboard',
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework',
+    title: 'Orders',
+    caption: 'View your orders',
+    icon: 'shopping_cart',
+    link: '/orders',
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev',
+    title: 'Products',
+    caption: 'View your products',
+    icon: 'shopping_basket',
+    link: '/products',
   },
   {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev',
+    title: 'Customers',
+    caption: 'View your customers',
+    icon: 'people',
+    link: '/customers',
   },
   {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev',
+    title: 'Settings',
+    caption: 'View your settings',
+    icon: 'settings',
+    link: '/settings',
   },
   {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev',
+    title: 'Help',
+    caption: 'Get help',
+    icon: 'help',
+    link: '/help',
   },
   {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev',
+    title: 'Logout',
+    caption: 'Logout from your account',
+    icon: 'logout',
+    link: '/logout',
   },
 ];
 
