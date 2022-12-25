@@ -11,29 +11,21 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title>
-          POS App
-        </q-toolbar-title>
+        <q-toolbar-title> POS App </q-toolbar-title>
 
         <div>POS v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      bordered
-    >
+    <q-drawer v-model="leftDrawerOpen" bordered>
       <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
+        <q-item-label header> Essential Links </q-item-label>
 
         <EssentialLink
           v-for="link in essentialLinks"
           :key="link.title"
           v-bind="link"
+          @click="leftDrawerOpen = false"
         />
       </q-list>
     </q-drawer>
@@ -53,44 +45,44 @@ const linksList = [
     title: 'Dashboard',
     caption: 'Go to your dashboard',
     icon: 'dashboard',
-    link: '/dashboard',
+    link: '/',
   },
-  {
-    title: 'Orders',
-    caption: 'View your orders',
-    icon: 'shopping_cart',
-    link: '/orders',
-  },
+  // {
+  //   title: 'Orders',
+  //   caption: 'View your orders',
+  //   icon: 'shopping_cart',
+  //   link: '/orders',
+  // },
   {
     title: 'Products',
     caption: 'View your products',
     icon: 'shopping_basket',
     link: '/products',
   },
-  {
-    title: 'Customers',
-    caption: 'View your customers',
-    icon: 'people',
-    link: '/customers',
-  },
-  {
-    title: 'Settings',
-    caption: 'View your settings',
-    icon: 'settings',
-    link: '/settings',
-  },
-  {
-    title: 'Help',
-    caption: 'Get help',
-    icon: 'help',
-    link: '/help',
-  },
-  {
-    title: 'Logout',
-    caption: 'Logout from your account',
-    icon: 'logout',
-    link: '/logout',
-  },
+  // {
+  //   title: 'Customers',
+  //   caption: 'View your customers',
+  //   icon: 'people',
+  //   link: '/customers',
+  // },
+  // {
+  //   title: 'Settings',
+  //   caption: 'View your settings',
+  //   icon: 'settings',
+  //   link: '/settings',
+  // },
+  // {
+  //   title: 'Help',
+  //   caption: 'Get help',
+  //   icon: 'help',
+  //   link: '/help',
+  // },
+  // {
+  //   title: 'Logout',
+  //   caption: 'Logout from your account',
+  //   icon: 'logout',
+  //   link: '/logout',
+  // },
 ];
 
 export default defineComponent({

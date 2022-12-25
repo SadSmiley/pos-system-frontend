@@ -4,7 +4,10 @@ List of tasks for this side project
 
 ### Todo
 
-- [ ] Show Current Time in Dashboard
+- [ ] List of Products
+- [ ] Create Products
+- [ ] Edit Products
+- [ ] Delete Products
 - [ ] Display All Product from database
 - [ ] On Click Add to Cart
 - [ ] Barcode Scan Add to Cart
@@ -13,7 +16,7 @@ List of tasks for this side project
 - [ ] Checkout Submit
 ### In Progress
 
-- [ ] Show Current Order Number based on Last Order Created
+- [ ] Product Page Layout
 
 ### Done ✓
 
@@ -21,6 +24,8 @@ List of tasks for this side project
 - [x] Cart Layout
 - [x] Product List Layout
 - [x] Barcode Input Layout
+- [x] Show Current Time in Dashboard
+- [x] Show Current Order Number based on Last Order Created
 
 POS System for Small Retail Store
 

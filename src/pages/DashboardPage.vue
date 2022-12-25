@@ -1,8 +1,9 @@
 <template>
   <q-page padding>
     <div class="dashboard-page" :class="isCartOpen && 'cart-open'">
-      <dashboard-component></dashboard-component>
-      <cart-component v-if="isCartOpen" @close="toggleCart"></cart-component>
+      <dashboard-component @addToCart="addToCart"></dashboard-component>
+      <cart-component ref="cartComponent" v-show="isCartOpen"
+      @close="toggleCart"></cart-component>
     </div>
     <q-page-sticky
       v-if="!isCartOpen"
@@ -27,6 +28,7 @@
 import { defineComponent, ref } from 'vue';
 import DashboardComponent from 'components/DashboardComponent.vue';
 import CartComponent from 'components/CartComponent.vue';
+import { Product } from 'src/components/models';
 
 export default defineComponent({
   name: 'DashboardPage',
@@ -36,8 +38,14 @@ export default defineComponent({
     const toggleCart = () => {
       isCartOpen.value = !isCartOpen.value;
     };
+    const cartComponent = ref<InstanceType<typeof CartComponent>>(null);
+    const addToCart = (product: Product) => {
+      if (cartComponent.value) cartComponent.value.addToCart(product);
+    };
 
-    return { toggleCart, isCartOpen };
+    return {
+      toggleCart, isCartOpen, cartComponent, addToCart,
+    };
   },
 });
 </script>
