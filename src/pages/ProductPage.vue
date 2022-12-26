@@ -9,7 +9,7 @@
             label="Add Product"
             icon="add"
             unelevated
-            @click="addProduct"
+            @click="addProduct()"
           />
         </div>
       </div>

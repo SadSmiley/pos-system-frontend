@@ -69,6 +69,7 @@ import {
 import { api } from 'boot/axios';
 import ProductListComponent from 'components/ProductListComponent.vue';
 import { Notify } from 'quasar';
+import ErrorHandler from 'src/helpers/error';
 import { Product, ProductResponse } from './models';
 
 export default defineComponent({
@@ -139,9 +140,13 @@ export default defineComponent({
       }, 1000);
 
       // get order number from api
-      await api.get('/api/v1/orders/number').then((res) => {
-        orderNumber.value = res?.data?.number;
-      });
+      try {
+        await api.get('/api/v1/orders/number').then((res) => {
+          orderNumber.value = res?.data?.number;
+        });
+      } catch (error) {
+        if (error instanceof Error) ErrorHandler.handle(error);
+      }
 
       isLoading.value = false;
     });
