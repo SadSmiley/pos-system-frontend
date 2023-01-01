@@ -12,6 +12,7 @@
           filled
           bg-color="white"
           label="Enter UPC Number"
+          readonly
         >
           <template v-slot:prepend>
             <q-icon name="search" />
@@ -19,7 +20,9 @@
         </q-input>
       </div>
       <div class="dashboard__main">
-        <product-list-component @click-product="addToCart"></product-list-component>
+        <product-list-component
+          @click-product="addToCart"
+        ></product-list-component>
       </div>
     </template>
   </div>
@@ -63,9 +66,7 @@
 </style>
 
 <script lang="ts">
-import {
-  defineComponent, ref, onMounted, onBeforeUnmount,
-} from 'vue';
+import { defineComponent, ref, onMounted, onBeforeUnmount } from 'vue';
 import { api } from 'boot/axios';
 import ProductListComponent from 'components/ProductListComponent.vue';
 import { Notify } from 'quasar';
@@ -104,17 +105,21 @@ export default defineComponent({
         const upc = itemCode.value;
         itemCode.value = '';
         try {
-          const product: ProductResponse = await api.get(`/api/v1/products/upc/${upc}`).then((response) => response.data);
+          const product: ProductResponse = await api
+            .get(`/api/v1/products/upc/${upc}`)
+            .then((response) => response.data);
           if (product) {
-            addToCart(new Product({
-              id: product._id,
-              name: product.name,
-              price: product.price,
-              upc: product.upc,
-              image: product.image,
-              stock: product.countInStock,
-              quantity: 1,
-            }));
+            addToCart(
+              new Product({
+                id: product._id,
+                name: product.name,
+                price: product.price,
+                upc: product.upc,
+                image: product.image,
+                stock: product.countInStock,
+                quantity: 1,
+              })
+            );
           }
         } catch (error) {
           Notify.create({

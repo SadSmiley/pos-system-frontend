@@ -36,6 +36,9 @@ module.exports = {
     // 'plugin:vue/vue3-recommended', // Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
 
     'airbnb-base',
+
+    // Prettier Fixes
+    'plugin:prettier/recommended',
   ],
 
   plugins: [

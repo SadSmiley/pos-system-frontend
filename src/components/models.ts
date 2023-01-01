@@ -80,10 +80,10 @@ export class Product {
 }
 
 export interface ProductResponse {
-  _id: string,
-  name: string,
-  price: number,
-  image?: string,
-  upc?: string,
-  countInStock: number,
+  _id: string;
+  name: string;
+  price: number;
+  image?: string;
+  upc?: string;
+  countInStock: number;
 }

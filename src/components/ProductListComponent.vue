@@ -1,17 +1,22 @@
 <template>
   <div class="product-list-component">
     <div class="product-list-component__row">
-      <div @click="onClickProduct(product)" v-for="(product, index) in productList" :key="index"
-      class="item">
+      <div
+        @click="onClickProduct(product)"
+        v-for="(product, index) in productList"
+        :key="index"
+        class="item"
+      >
         <q-card flat bordered>
-          <img
-            class="item__image"
-            :src="product.image"
-          />
+          <img class="item__image" :src="product.image" />
           <q-card-section>
             <div class="text-h6 item__title">{{ product.name }}</div>
-            <div class="text-subtitle2 item__subtitle">PHP {{ product.formattedPrice }}</div>
-            <div class="text-subtitle2 item__stock">Current Stock: {{ product.stock }}</div>
+            <div class="text-subtitle2 item__subtitle">
+              PHP {{ product.formattedPrice }}
+            </div>
+            <div class="text-subtitle2 item__stock">
+              Current Stock: {{ product.stock }}
+            </div>
           </q-card-section>
         </q-card>
       </div>

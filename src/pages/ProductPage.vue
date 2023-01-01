@@ -13,8 +13,23 @@
           />
         </div>
       </div>
+      <div class="product-page__filter">
+        <q-input
+          v-model="itemCode"
+          filled
+          bg-color="white"
+          label="Enter UPC Number"
+          readonly
+        >
+          <template v-slot:prepend>
+            <q-icon name="search" />
+          </template>
+        </q-input>
+      </div>
       <div class="product-page__main">
-        <product-list-component ref="productListComponent"></product-list-component>
+        <product-list-component
+          ref="productListComponent"
+        ></product-list-component>
       </div>
     </div>
     <!-- Create Dialog for ProductDialogComponent -->
@@ -25,6 +40,14 @@
         @close="productDialog = false"
         @reload="reloadData"
       ></product-dialog-component>
+    </q-dialog>
+    <!-- Create Dialog for Showing Price of Product -->
+    <q-dialog v-model="priceDialog">
+      <product-price-component
+        v-if="productData"
+        :product-data="productData"
+        @close="priceDialog = false"
+      ></product-price-component>
     </q-dialog>
   </q-page>
 </template>
@@ -47,49 +70,91 @@
     }
   }
 
-  &__main {
+  &__filter {
+    margin-bottom: 1rem;
+  }
 
+  &__main {
   }
 }
 </style>
 
 <script lang="ts">
-import { defineComponent, ref, onBeforeUnmount } from 'vue';
+// Plugins
+import { defineComponent, ref, onBeforeUnmount, nextTick } from 'vue';
+import { api } from 'boot/axios';
+import { AxiosError } from 'axios';
+
+// Components
 import ProductListComponent from 'components/ProductListComponent.vue';
 import ProductDialogComponent from 'components/ProductDialogComponent.vue';
-import { Product } from 'components/models';
+import ProductPriceComponent from 'components/ProductPriceComponent.vue';
+
+// Models
+import { Product, ProductResponse } from 'components/models';
 
 export default defineComponent({
   name: 'ProductPage',
-  components: { ProductListComponent, ProductDialogComponent },
+  components: {
+    ProductListComponent,
+    ProductDialogComponent,
+    ProductPriceComponent,
+  },
   setup() {
     const productDialog = ref<boolean>(false);
+    const priceDialog = ref<boolean>(false);
     const productData = ref<Product>();
-    const addProduct = (upc?: string) => {
-      productData.value = new Product({
-        name: '',
-        price: 0,
-        quantity: 0,
-        image: '',
-        upc: upc || '',
-      });
-      productDialog.value = true;
+    const itemCode = ref<string>('');
+    const addProduct = async (upc?: string) => {
+      try {
+        const product: ProductResponse = await api
+          .get(`/api/v1/products/upc/${upc}`)
+          .then((response) => response.data);
+        if (product) {
+          productData.value = new Product({
+            id: product._id,
+            name: product.name,
+            price: product.price,
+            quantity: product.countInStock,
+            image: product.image,
+            upc: product.upc,
+          });
+          priceDialog.value = true;
+        }
+      } catch (error) {
+        const err = error as AxiosError;
+        if (err.response?.status === 404) {
+          productData.value = new Product({
+            name: '',
+            price: 0,
+            quantity: 0,
+            image: '',
+            upc: upc || '',
+          });
+          if (productDialog.value) productDialog.value = false;
+          nextTick(() => {
+            productDialog.value = true;
+          });
+        } else {
+          throw error;
+        }
+      }
     };
 
-    const productListComponent = ref<InstanceType<typeof ProductListComponent>>(null);
+    const productListComponent =
+      ref<InstanceType<typeof ProductListComponent>>(null);
 
     const reloadData = () => {
       if (productListComponent.value) productListComponent.value.loadData();
     };
 
-    let itemCode = '';
     const onBarcodeScannerInput = (e) => {
       if (e.key === 'Enter') {
-        const upc = itemCode;
-        itemCode = '';
+        const upc = itemCode.value;
+        itemCode.value = '';
         addProduct(upc);
       } else if (e.key.match(/^[0-9]+$/)) {
-        itemCode += e.key;
+        itemCode.value += e.key;
       }
     };
 
@@ -99,7 +164,13 @@ export default defineComponent({
     });
 
     return {
-      productDialog, addProduct, productData, productListComponent, reloadData,
+      productDialog,
+      priceDialog,
+      addProduct,
+      productData,
+      productListComponent,
+      reloadData,
+      itemCode,
     };
   },
 });

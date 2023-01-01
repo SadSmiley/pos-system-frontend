@@ -17,6 +17,7 @@ List of tasks for this side project
 ### In Progress
 
 - [ ] Product Page Layout
+- [ ] If UPC exist update instead
 
 ### Done ✓
 

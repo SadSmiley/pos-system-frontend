@@ -2,8 +2,11 @@
   <q-page padding>
     <div class="dashboard-page" :class="isCartOpen && 'cart-open'">
       <dashboard-component @addToCart="addToCart"></dashboard-component>
-      <cart-component ref="cartComponent" v-show="isCartOpen"
-      @close="toggleCart"></cart-component>
+      <cart-component
+        ref="cartComponent"
+        v-show="isCartOpen"
+        @close="toggleCart"
+      ></cart-component>
     </div>
     <q-page-sticky
       v-if="!isCartOpen"
@@ -38,13 +41,16 @@ export default defineComponent({
     const toggleCart = () => {
       isCartOpen.value = !isCartOpen.value;
     };
-    const cartComponent = ref<InstanceType<typeof CartComponent>>(null);
+    const cartComponent = ref<InstanceType<typeof CartComponent>>();
     const addToCart = (product: Product) => {
       if (cartComponent.value) cartComponent.value.addToCart(product);
     };
 
     return {
-      toggleCart, isCartOpen, cartComponent, addToCart,
+      toggleCart,
+      isCartOpen,
+      cartComponent,
+      addToCart,
     };
   },
 });

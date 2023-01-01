@@ -11,8 +11,13 @@
         <div v-for="product in products" :key="product.id" class="item">
           <div class="item__info">
             <div class="image">
-              <q-btn @click="removeFromCart(product)" class="remove" unelevated icon="mdi-close"
-              round />
+              <q-btn
+                @click="removeFromCart(product)"
+                class="remove"
+                unelevated
+                icon="mdi-close"
+                round
+              />
               <img :src="product.image" alt="Product Image" />
             </div>
             <div class="info">
@@ -60,7 +65,12 @@
           </div>
         </div>
         <div class="actions">
-          <q-btn @click="checkout()" unelevated label="Checkout" color="primary" />
+          <q-btn
+            @click="checkout()"
+            unelevated
+            label="Checkout"
+            color="primary"
+          />
         </div>
       </div>
     </div>
@@ -227,9 +237,7 @@ export default defineComponent({
         return;
       }
 
-      const findProduct = products.value.find(
-        (item) => item.id === product.id,
-      );
+      const findProduct = products.value.find((item) => item.id === product.id);
       if (findProduct) {
         findProduct.quantity += 1;
       } else {
@@ -244,14 +252,12 @@ export default defineComponent({
     };
 
     const removeFromCart = (product: Product) => {
-      const findProduct = products.value.find(
-        (item) => item.id === product.id,
-      );
+      const findProduct = products.value.find((item) => item.id === product.id);
       if (findProduct) {
         findProduct.quantity -= 1;
         if (findProduct.quantity === 0) {
           products.value = products.value.filter(
-            (item) => item.id !== product.id,
+            (item) => item.id !== product.id
           );
         }
       }
@@ -260,7 +266,7 @@ export default defineComponent({
     const summary = computed(() => {
       const subTotal = products.value.reduce(
         (total, product) => total + product.price * product.quantity,
-        0,
+        0
       );
       const tax = 0;
       const total = subTotal + tax;
@@ -283,7 +289,9 @@ export default defineComponent({
           })),
         });
         Notify.create({
-          message: `You have successfully checked out. Your total is PHP ${summary.value.total.toFixed(2)}`,
+          message: `You have successfully checked out. Your total is PHP ${summary.value.total.toFixed(
+            2
+          )}`,
           color: 'positive',
           position: 'top',
         });
