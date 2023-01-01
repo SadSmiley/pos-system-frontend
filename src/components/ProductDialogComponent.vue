@@ -26,6 +26,7 @@
           filled
           lazy-rules
           type="number"
+          step="any"
           :rules="[(val) => val.length > 0 || 'Price is required']"
         />
         <q-input
@@ -34,7 +35,6 @@
           filled
           lazy-rules
           type="number"
-          :rules="[(val) => val.length > 0 || 'Quantity is required']"
         />
       </q-card-section>
       <q-card-actions align="right">
