@@ -4,9 +4,9 @@ List of tasks for this side project
 
 ### Todo
 
+- [ ] Barcode Scanning via Camera
 - [ ] List of Products
 - [ ] Create Products
-- [ ] Edit Products
 - [ ] Delete Products
 - [ ] Display All Product from database
 - [ ] On Click Add to Cart
@@ -16,8 +16,7 @@ List of tasks for this side project
 - [ ] Checkout Submit
 ### In Progress
 
-- [ ] Product Page Layout
-- [ ] If UPC exist update instead
+- [ ] Edit / View Product
 
 ### Done ✓
 
@@ -27,6 +26,7 @@ List of tasks for this side project
 - [x] Barcode Input Layout
 - [x] Show Current Time in Dashboard
 - [x] Show Current Order Number based on Last Order Created
+- [x] Product Page Layout
 
 POS System for Small Retail Store
 

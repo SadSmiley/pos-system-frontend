@@ -3,7 +3,13 @@
     <div class="name">{{ productName }}</div>
     <div class="price">PHP {{ productPrice.toFixed(2) }}</div>
     <div class="button">
-      <q-btn unelevated color="primary" label="Close" @click="$emit('close')" />
+      <q-btn
+        unelevated
+        color="primary"
+        label="Edit Product"
+        @click="$emit('edit')"
+      />
+      <q-btn unelevated color="red" label="Close" @click="$emit('close')" />
     </div>
   </div>
 </template>
@@ -23,6 +29,10 @@
   }
   .button {
     margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 15px;
   }
 }
 </style>

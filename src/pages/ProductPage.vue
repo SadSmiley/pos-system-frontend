@@ -29,6 +29,7 @@
       <div class="product-page__main">
         <product-list-component
           ref="productListComponent"
+          @click-product="(product) => addProduct(product.upc)"
         ></product-list-component>
       </div>
     </div>
@@ -46,6 +47,12 @@
       <product-price-component
         v-if="productData"
         :product-data="productData"
+        @edit="
+          () => {
+            productDialog = true;
+            priceDialog = false;
+          }
+        "
         @close="priceDialog = false"
       ></product-price-component>
     </q-dialog>

@@ -1,7 +1,7 @@
 <template>
   <q-card>
     <q-card-section>
-      <div class="text-h6">Add Product</div>
+      <div class="text-h6">{{ product.id ? 'Edit' : 'Add' }} Product</div>
     </q-card-section>
     <q-form @submit.prevent="saveProduct">
       <q-card-section>
@@ -27,7 +27,7 @@
           lazy-rules
           type="number"
           step="any"
-          :rules="[(val) => val.length > 0 || 'Price is required']"
+          style="margin-bottom: 15px"
         />
         <q-input
           v-model="product.quantity"
