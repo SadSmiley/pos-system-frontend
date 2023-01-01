@@ -81,7 +81,7 @@
 
 <script lang="ts">
 // Plugins
-import { defineComponent, ref, onBeforeUnmount, nextTick } from 'vue';
+import { defineComponent, ref, onBeforeUnmount, nextTick, watch } from 'vue';
 import { api } from 'boot/axios';
 import { AxiosError } from 'axios';
 
@@ -147,7 +147,7 @@ export default defineComponent({
     };
 
     const productListComponent =
-      ref<InstanceType<typeof ProductListComponent>>(null);
+      ref<InstanceType<typeof ProductListComponent>>();
 
     const reloadData = () => {
       if (productListComponent.value) productListComponent.value.loadData();
@@ -166,6 +166,10 @@ export default defineComponent({
     document.addEventListener('keydown', onBarcodeScannerInput);
     onBeforeUnmount(() => {
       document.removeEventListener('keydown', onBarcodeScannerInput);
+    });
+
+    watch(productDialog, () => {
+      itemCode.value = '';
     });
 
     return {
