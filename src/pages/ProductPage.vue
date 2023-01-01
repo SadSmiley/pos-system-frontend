@@ -119,7 +119,11 @@ export default defineComponent({
             image: product.image,
             upc: product.upc,
           });
-          priceDialog.value = true;
+          productDialog.value = false;
+          priceDialog.value = false;
+          nextTick(() => {
+            priceDialog.value = true;
+          });
         }
       } catch (error) {
         const err = error as AxiosError;
@@ -131,7 +135,8 @@ export default defineComponent({
             image: '',
             upc: upc || '',
           });
-          if (productDialog.value) productDialog.value = false;
+          productDialog.value = false;
+          priceDialog.value = false;
           nextTick(() => {
             productDialog.value = true;
           });
