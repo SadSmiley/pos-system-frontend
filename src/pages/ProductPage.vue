@@ -160,16 +160,15 @@ export default defineComponent({
         addProduct(upc);
       } else if (e.key.match(/^[0-9]+$/)) {
         itemCode.value += e.key;
+        setTimeout(() => {
+          itemCode.value = '';
+        }, 10);
       }
     };
 
     document.addEventListener('keydown', onBarcodeScannerInput);
     onBeforeUnmount(() => {
       document.removeEventListener('keydown', onBarcodeScannerInput);
-    });
-
-    watch(productDialog, () => {
-      itemCode.value = '';
     });
 
     return {
