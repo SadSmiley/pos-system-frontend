@@ -102,5 +102,11 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
 
     // "@typescript-eslint/indent": ["error"]
-  },
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      },
+    ],
+    },
 };
