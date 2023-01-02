@@ -6,6 +6,13 @@
         <div class="actions">
           <q-btn
             color="primary"
+            label="Scan Barcode"
+            icon="mdi-barcode-scan"
+            unelevated
+            @click="scanBarcode()"
+          />
+          <q-btn
+            color="primary"
             label="Add Product"
             icon="add"
             unelevated
@@ -56,6 +63,13 @@
         @close="priceDialog = false"
       ></product-price-component>
     </q-dialog>
+    <!-- Create Dialog for Barcode Scanner -->
+    <q-dialog v-model="barcodeDialog">
+      <barcode-scanner-component
+        @close="barcodeDialog = false"
+        @scan="scanBarcode"
+      ></barcode-scanner-component>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -85,7 +99,7 @@
 
 <script lang="ts">
 // Plugins
-import { defineComponent, ref, onBeforeUnmount, nextTick, watch } from 'vue';
+import { defineComponent, ref, onBeforeUnmount, nextTick } from 'vue';
 import { api } from 'boot/axios';
 import { AxiosError } from 'axios';
 
@@ -93,6 +107,7 @@ import { AxiosError } from 'axios';
 import ProductListComponent from 'components/ProductListComponent.vue';
 import ProductDialogComponent from 'components/ProductDialogComponent.vue';
 import ProductPriceComponent from 'components/ProductPriceComponent.vue';
+import BarcodeScannerComponent from 'components/BarcodeScannerComponent.vue';
 
 // Models
 import { Product, ProductResponse } from 'components/models';
@@ -103,12 +118,19 @@ export default defineComponent({
     ProductListComponent,
     ProductDialogComponent,
     ProductPriceComponent,
+    BarcodeScannerComponent,
   },
   setup() {
+    // Refs
     const productDialog = ref<boolean>(false);
     const priceDialog = ref<boolean>(false);
+    const barcodeDialog = ref<boolean>(false);
     const productData = ref<Product>();
     const itemCode = ref<string>('');
+    const productListComponent =
+      ref<InstanceType<typeof ProductListComponent>>();
+
+    // Methods
     const addProduct = async (upc?: string) => {
       try {
         const product: ProductResponse = await api
@@ -149,14 +171,15 @@ export default defineComponent({
         }
       }
     };
-
-    const productListComponent =
-      ref<InstanceType<typeof ProductListComponent>>();
-
+    const scanBarcode = async () => {
+      barcodeDialog.value = false;
+      nextTick(() => {
+        barcodeDialog.value = true;
+      });
+    };
     const reloadData = () => {
       if (productListComponent.value) productListComponent.value.loadData();
     };
-
     const onBarcodeScannerInput = (e: KeyboardEvent) => {
       if (e.key === 'Enter') {
         const upc = itemCode.value;
@@ -170,15 +193,19 @@ export default defineComponent({
       }
     };
 
+    // Watchers
     document.addEventListener('keydown', onBarcodeScannerInput);
     onBeforeUnmount(() => {
       document.removeEventListener('keydown', onBarcodeScannerInput);
     });
 
+    // Return
     return {
       productDialog,
       priceDialog,
+      barcodeDialog,
       addProduct,
+      scanBarcode,
       productData,
       productListComponent,
       reloadData,

@@ -37,7 +37,7 @@ export default defineComponent({
   name: 'DashboardPage',
   components: { DashboardComponent, CartComponent },
   setup() {
-    const isCartOpen = ref<boolean>(true);
+    const isCartOpen = ref<boolean>(false);
     const toggleCart = () => {
       isCartOpen.value = !isCartOpen.value;
     };

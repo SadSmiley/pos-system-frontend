@@ -1,0 +1,7 @@
+{
+  "appId": "com.pos.system",
+  "appName": "POS System",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}

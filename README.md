@@ -18,6 +18,7 @@ List of tasks for this side project
 - [ ] Enter UPC Code Add to Cart
 - [ ] Show Actual Summary (Subtotal, Tax, Total)
 - [ ] Checkout Submit
+
 ### In Progress
 
 - [ ] Edit / View Product
