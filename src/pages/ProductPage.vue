@@ -80,9 +80,6 @@
   &__filter {
     margin-bottom: 1rem;
   }
-
-  &__main {
-  }
 }
 </style>
 
@@ -160,7 +157,7 @@ export default defineComponent({
       if (productListComponent.value) productListComponent.value.loadData();
     };
 
-    const onBarcodeScannerInput = (e) => {
+    const onBarcodeScannerInput = (e: KeyboardEvent) => {
       if (e.key === 'Enter') {
         const upc = itemCode.value;
         itemCode.value = '';
