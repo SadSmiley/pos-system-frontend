@@ -2,7 +2,7 @@
   <div class="product-price-component">
     <div class="name">{{ productName }}</div>
     <div class="price">&#8369;{{ productPrice.toFixed(2) }}</div>
-    <div class="price small" v-if="productPricePcs">
+    <div class="price small" v-if="productPricePcs > 1">
       &#8369;{{ productPriceTotal.toFixed(2) }} per {{ productPricePcs }} pcs
     </div>
     <div class="button">
@@ -55,10 +55,10 @@ export default defineComponent({
     const productPrice = ref<number>(props.productData.price);
 
     let total = productPrice.value;
-    let pcs = 0;
+    let pcs = 1;
 
     while (total % 1 !== 0) {
-      total += total;
+      total += productPrice.value;
       pcs += 1;
     }
 
